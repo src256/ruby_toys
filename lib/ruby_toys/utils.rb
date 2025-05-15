@@ -12,14 +12,17 @@ module RubyToys
       return nil
     end
 
-    def self.handle_error(e)
-      if e.message =~ /Incorrect string value:/
-        # utf8mb4にすればいいのだ…。とりあえずそのばしのぎ。
-        puts e.message[0, 100]
-      else
-        puts e.message
-        puts e.backtrace
-      end
+    def self.handle_error(e, verbose = true)
+      # if e.message =~ /Incorrect string value:/
+      #   # utf8mb4にすればいいのだ…。とりあえずそのばしのぎ。
+      #   puts e.message[0, 100]
+      # else
+      #   puts e.message
+      #   puts e.backtrace
+      # end
+      # 2025/05/15(木) Incorrect string value:をテストのために外してみた
+      puts "Error: #{e.message}"
+      puts e.backtrace.join("\n") + "\n" if verbose
     end
   end
 end
