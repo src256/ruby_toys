@@ -5,6 +5,7 @@ require_relative 'ruby_toys/blank'
 require_relative 'ruby_toys/pair'
 require_relative 'ruby_toys/utils'
 require_relative 'ruby_toys/multi_io'
+require_relative 'ruby_toys/japanese'
 
 module RubyToys
   class Error < StandardError; end
