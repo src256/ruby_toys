@@ -23,9 +23,38 @@ module RubyToys
       str
     end
 
+    # 英単語の前後の空白だけを削除する
+    def self.format_word(text)
+      # ChatGPTが解決できずGeminiに教えて貰う(英単語を検索する方法ではうまくいかず、日本語文字列を指定する方法)
+      # 1. 文字列全体の先頭と末尾の空白を削除（trim）
+      trimmed_text = text.strip
+
+      # 2. 英単語以外の文字（ここでは日本語を想定）の直前・直後の空白を削除
+      #    - \s* は0回以上の空白文字
+      #    - ([\p{Han}\p{Hiragana}\p{Katakana}]+) は日本語の文字（漢字、ひらがな、カタカナ、記号）をキャプチャ
+      #    - \1 はキャプチャした日本語の文字に戻す
+      cleaned_text = trimmed_text.gsub(/\s*([\p{Han}\p{Hiragana}\p{Katakana}\p{Punctuation}]+)\s*/, '\1')
+
+      # 3. 英語と日本語の間の空白も整えるため、再度全体をtrimする（念のため）
+      cleaned_text.strip
+    end
+
+    # 全角コロン or 半角コロン（後ろにスペースがない場合も含む）正規化
+    def self.format_colon(text)
+      text.gsub(/\s*[:\uFF1A]\s*/, ': ')       # コロンの前に空白があれば削除
+    end
+
     def self.format(str)
+      #      puts "Input: #{str}"
+      # 最初に空白を削除しとかないとformat_colonが正しく動作しないので注意(あとからformat_wordを呼ぶと追加した空白が削除されてしまう)
+      str = format_word(str)
+      #puts "After word formatting: #{str}"
       str = format_parentheses(str)
+      #puts "After parentheses: #{str}"
       str = format_comma(str)
+      #puts "After comma: #{str}"
+      str = format_colon(str)
+      #puts "After colon: #{str}"
       str
     end
 
