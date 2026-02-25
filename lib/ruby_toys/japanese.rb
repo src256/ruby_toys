@@ -31,9 +31,9 @@ module RubyToys
 
       # 2. 英単語以外の文字（ここでは日本語を想定）の直前・直後の空白を削除
       #    - \s* は0回以上の空白文字
-      #    - ([\p{Han}\p{Hiragana}\p{Katakana}]+) は日本語の文字（漢字、ひらがな、カタカナ、記号）をキャプチャ
+      #    - (\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Punctuation})+ は日本語の文字（漢字、ひらがな、カタカナ、記号）をキャプチャ
       #    - \1 はキャプチャした日本語の文字に戻す
-      cleaned_text = trimmed_text.gsub(/\s*([\p{Han}\p{Hiragana}\p{Katakana}\p{Punctuation}]+)\s*/, '\1')
+      cleaned_text = trimmed_text.gsub(/\s*((?:\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Punctuation})+)\s*/, '\1')
 
       # 3. 英語と日本語の間の空白も整えるため、再度全体をtrimする（念のため）
       cleaned_text.strip
