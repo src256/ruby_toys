@@ -1,16 +1,17 @@
 PATH
   remote: .
   specs:
-    ruby_toys (0.3.0)
+    ruby_toys (0.3.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.25.5)
-    rake (13.2.1)
+    minitest (5.27.0)
+    rake (13.3.1)
 
 PLATFORMS
   arm64-darwin-24
+  ruby
 
 DEPENDENCIES
   minitest (~> 5.0)
@@ -18,4 +19,4 @@ DEPENDENCIES
   ruby_toys!
 
 BUNDLED WITH
-   2.4.19
+   2.6.3
